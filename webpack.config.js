@@ -9,8 +9,8 @@ module.exports = {
   },
   module : {
     loaders : [{
-      test: /.js?$/,
-      loaders : ['babel-loader', 'eslint-loader'],
+      test: /.jsx?$/,
+      loader : 'babel-loader',
       exclude: /node_modules/,
       query : {
         presets : ['env', 'react']
