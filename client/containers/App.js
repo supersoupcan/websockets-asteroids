@@ -1,33 +1,46 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { setName } from '../actions/userActions';
+
+import socket from '../socket';
+import socketEvent from '../actions/socketEvent';
+import socketUpdate from '../actions/socketUpdate';
+
+import Game from '../components/Game';
 
 
-class App extends Component {
+class App extends Component{
+  componentDidMount(){
+    socket.onmessage = (e) => {
+      this.props.socketEvent(e.data);
+    }
+  }
   render(){
     return(
-      <div>
-        <h1>Simple React Boiler Plate</h1>
-        <p> Hello {this.props.user.name} </p>
-        <p> You are {this.props.user.age} years old</p>
-        <p onClick={() => this.props.setName("Kendrick")}> 
-          Click here to change your name to Kendrick
-        </p> 
-      </div>
-    );
+      <Game 
+        game={this.props.game}
+        update={this.props.socketUpdate}
+        width={window.innerWidth * window.devicePixelRatio}
+        height={window.innerHeight * window.devicePixelRatio}
+        cf={this.props.config}
+      />
+    )
   }
 }
 
 const mapStateToProps = (state) => {
   return {
-    user : state.user
+    game : state.game,
+    config : state.config
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setName : (name) => {
-      dispatch(setName(name));
+    socketEvent : data => {
+      dispatch(socketEvent(data));
+    },
+    socketUpdate : data => {
+      dispatch(socketUpdate(data));
     }
   };
 };

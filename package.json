@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "bundle": "webpack --watch --colors --progress",
-    "start" : "node ./server/bin/www",
+    "start": "node ./server/bin/www",
     "start-dev": "nodemon ./server/bin/www"
   },
   "author": "",
@@ -13,11 +13,17 @@
   "dependencies": {
     "axios": "^0.16.2",
     "express": "^4.16.2",
+    "express-ws": "^3.0.0",
+    "p2": "^0.7.1",
+    "randomcolor": "^0.5.3",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "solve-quadratic-equation": "^0.1.0",
+    "uuid": "^3.1.0",
+    "ws": "^3.2.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",

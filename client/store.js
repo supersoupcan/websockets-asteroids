@@ -1,17 +1,18 @@
 import {createStore, combineReducers, applyMiddleware} from 'redux';
 import logger from 'redux-logger';
+import thunk from 'redux-thunk';
 
-import user from "./reducers/userReducer";
-
+import game from "./reducers/gameReducer";
+import config from "./reducers/configReducer";
+import socket from './socket';
 
 export default createStore(
   combineReducers({
-    user : user,
+    game : game,
+    config : config
   }), {
-    user: {
-      name : "Jacob",
-      age: 22,
-      }
-    },
-  applyMiddleware(logger)
+    game : null,
+    config : null,
+  },
+  applyMiddleware(thunk.withExtraArgument(socket))
 );
